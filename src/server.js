@@ -2,12 +2,18 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const app = express()
-const models = require('./models/index');
+//const models = require('./models/index');
 
 // Decode json and x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+
+app.get('/', function (req, res) {
+  res.send("Hello World");    
+})
+
+/*
 // Add a bit of logging
 app.use(morgan('short'))
 
@@ -65,18 +71,18 @@ app.put('/Grimelins', function(req, res) {
       res.send('Grimelins updated !')
     })
 })
-
+*/
 
 
 
 // Synchronize models
-models.sequelize.sync().then(function() {
+//models.sequelize.sync().then(function() {
   /**
    * Listen on provided port, on all network interfaces.
    * 
    * Listen only when database connection is sucessfull
    */
-  app.listen(3000, function() {
-    console.log('Express server listening on port 3000');
+  app.listen(process.env.PORT, function() {
+    console.log('Express server listening on port 8080');
   });
-});
+//});
